@@ -590,7 +590,9 @@ const bool Z_MIN_PROBE_ENDSTOP_INVERTING = false; // set to true to invert the l
 // default settings
 
 //#define DEFAULT_AXIS_STEPS_PER_UNIT   {5,5,250,250}  // No microsteps!
-#define DEFAULT_AXIS_STEPS_PER_UNIT   {80,80,4000, 52}  // 16 microsteps - none on extruder
+//#define DEFAULT_AXIS_STEPS_PER_UNIT   {80,80,4000, 52}  // 16 microsteps - none on extruder
+#define DEFAULT_AXIS_STEPS_PER_UNIT   {80,80,4000, 1800}  // changed gear ratio
+
 // steps per mm on extruder 31 by calculation then adjusted by experiment
 // X/Y 1.8 degree (200 steps per rev) no microsteps (1 step per step) betlt pitch 2 teeth per mm, 20 tooth pully
 // Z 1.8 degree (200 steps per rev) no microsteps (1 step per step) M5 -0.8 mm per rev
