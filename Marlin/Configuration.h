@@ -150,7 +150,7 @@ Here are some standard links for getting your machine calibrated:
 #define TEMP_SENSOR_1 0
 #define TEMP_SENSOR_2 0
 #define TEMP_SENSOR_3 0
-#define TEMP_SENSOR_BED 0
+#define TEMP_SENSOR_BED 1
 
 // This makes temp sensor 1 a redundant sensor for sensor 0. If the temperatures difference between these sensors is to high the print will be aborted.
 //#define TEMP_SENSOR_1_AS_REDUNDANT
@@ -209,21 +209,12 @@ Here are some standard links for getting your machine calibrated:
   #define PID_INTEGRAL_DRIVE_MAX PID_MAX  //limit for the integral term
   #define K1 0.95 //smoothing factor within the PID
 
-  // If you are using a pre-configured hotend then you can use one of the value sets by uncommenting it
-  // Ultimaker
-  #define  DEFAULT_Kp 22.2
-  #define  DEFAULT_Ki 1.08
-  #define  DEFAULT_Kd 114
+  
+  // sean - results of autotuning
+#define  DEFAULT_Kp 30.63
+#define  DEFAULT_Ki 2.09
+#define  DEFAULT_Kd 112.16
 
-  // MakerGear
-  //#define  DEFAULT_Kp 7.0
-  //#define  DEFAULT_Ki 0.1
-  //#define  DEFAULT_Kd 12
-
-  // Mendel Parts V9 on 12V
-  //#define  DEFAULT_Kp 63.0
-  //#define  DEFAULT_Ki 2.25
-  //#define  DEFAULT_Kd 440
 
 #endif // PIDTEMP
 
@@ -239,7 +230,7 @@ Here are some standard links for getting your machine calibrated:
 // If your configuration is significantly different than this and you don't understand the issues involved, you probably
 // shouldn't use bed PID until someone else verifies your hardware works.
 // If this is enabled, find your own PID constants below.
-//#define PIDTEMPBED
+#define PIDTEMPBED
 
 //#define BED_LIMIT_SWITCHING
 
@@ -261,11 +252,11 @@ Here are some standard links for getting your machine calibrated:
   #define  DEFAULT_bedKi .023
   #define  DEFAULT_bedKd 305.4
 
-  //120v 250W silicone heater into 4mm borosilicate (MendelMax 1.5+)
-  //from pidautotune
-  //#define  DEFAULT_bedKp 97.1
-  //#define  DEFAULT_bedKi 1.41
-  //#define  DEFAULT_bedKd 1675.16
+
+// sean 
+#define  DEFAULT_bedKp 267.90
+#define  DEFAULT_bedKi 19.20
+#define  DEFAULT_bedKd 934.61
 
   // FIND YOUR OWN: "M303 E-1 C8 S90" to run autotune on the bed at 90 degreesC for 8 cycles.
 #endif // PIDTEMPBED
@@ -278,7 +269,7 @@ Here are some standard links for getting your machine calibrated:
 //if PREVENT_DANGEROUS_EXTRUDE is on, you can still disable (uncomment) very long bits of extrusion separately.
 #define PREVENT_LENGTHY_EXTRUDE
 
-#define EXTRUDE_MINTEMP 170 // sean was 200 - lowered for pla temps
+#define EXTRUDE_MINTEMP 160 // sean was 200 - lowered for pla temps
 #define EXTRUDE_MAXLENGTH (X_MAX_LENGTH+Y_MAX_LENGTH) //prevent extrusion of very large distances.
 
 //===========================================================================
@@ -334,13 +325,14 @@ Here are some standard links for getting your machine calibrated:
 
 // Mechanical endstop with COM to ground and NC to Signal uses "false" here (most common setup).
 const bool X_MIN_ENDSTOP_INVERTING = false; // set to true to invert the logic of the endstop.
-const bool Y_MIN_ENDSTOP_INVERTING = true; // set to true to invert the logic of the endstop.
+const bool Y_MIN_ENDSTOP_INVERTING = false; // set to true to invert the logic of the endstop.
 const bool Z_MIN_ENDSTOP_INVERTING = false; // set to true to invert the logic of the endstop.
+
 const bool X_MAX_ENDSTOP_INVERTING = true; // set to true to invert the logic of the endstop. 
 const bool Y_MAX_ENDSTOP_INVERTING = false; // set to true to invert the logic of the endstop.
 const bool Z_MAX_ENDSTOP_INVERTING = true; // set to true to invert the logic of the endstop.
 const bool Z_MIN_PROBE_ENDSTOP_INVERTING = false; // set to true to invert the logic of the endstop.
-//#define DISABLE_MAX_ENDSTOPS // sean
+#define DISABLE_MAX_ENDSTOPS 
 //#define DISABLE_MIN_ENDSTOPS
 
 // If you want to enable the Z probe pin, but disable its use, uncomment the line below.
@@ -370,8 +362,8 @@ const bool Z_MIN_PROBE_ENDSTOP_INVERTING = false; // set to true to invert the l
 // @section machine
 
 // Invert the stepper direction. Change (or reverse the motor connector) if an axis goes the wrong way.
-#define INVERT_X_DIR false  // sean
-#define INVERT_Y_DIR true // sean
+#define INVERT_X_DIR true  // sean
+#define INVERT_Y_DIR false // sean
 #define INVERT_Z_DIR false
 
 // @section extruder
@@ -388,7 +380,7 @@ const bool Z_MIN_PROBE_ENDSTOP_INVERTING = false; // set to true to invert the l
 // Sets direction of endstops when homing; 1=MAX, -1=MIN
 // :[-1,1]
 #define X_HOME_DIR -1
-#define Y_HOME_DIR 1 // sean reverse y direction - was getting upside down prints
+#define Y_HOME_DIR -1 
 #define Z_HOME_DIR -1 
 
 #define min_software_endstops true // If true, axis won't move to coordinates less than HOME_POS.
@@ -401,8 +393,8 @@ const bool Z_MIN_PROBE_ENDSTOP_INVERTING = false; // set to true to invert the l
 #define Y_MIN_POS 0
 #define Z_MIN_POS 0
 #define X_MAX_POS 170
-#define Y_MAX_POS 120
-#define Z_MAX_POS 100
+#define Y_MAX_POS 180
+#define Z_MAX_POS 170
 
 //===========================================================================
 //========================= Filament Runout Sensor ==========================
@@ -591,7 +583,14 @@ const bool Z_MIN_PROBE_ENDSTOP_INVERTING = false; // set to true to invert the l
 
 //#define DEFAULT_AXIS_STEPS_PER_UNIT   {5,5,250,250}  // No microsteps!
 //#define DEFAULT_AXIS_STEPS_PER_UNIT   {80,80,4000, 52}  // 16 microsteps - none on extruder
-#define DEFAULT_AXIS_STEPS_PER_UNIT   {80,80,4000, 1800}  // changed gear ratio
+//  http://reprap.org/wiki/Triffid_Hunter%27s_Calibration_Guide#Calculate
+//  Gregstruder with a 43:10 gear ratio
+// (200 * 16) * (43 / 10) / (7 * 3.14159) = 625.70681
+// Set extruder temporarily with `M92 E123`
+//#define DEFAULT_AXIS_STEPS_PER_UNIT   {80,80,4000, 626}  // changed gear ratio
+
+// red PLA @1.9mm (says 1.75 on packet) - print at 200/175
+#define DEFAULT_AXIS_STEPS_PER_UNIT   {80,80,4000, 625}  // changed gear ratio
 
 // steps per mm on extruder 31 by calculation then adjusted by experiment
 // X/Y 1.8 degree (200 steps per rev) no microsteps (1 step per step) betlt pitch 2 teeth per mm, 20 tooth pully
