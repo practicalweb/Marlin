@@ -1,0 +1,23 @@
+SENDING:M503
+SD init fail   
+Steps per unit:
+M92 X160.00 Y80.00 Z8000.00 E625.00
+Maximum feedrates (mm/s):
+M203 X300.00 Y300.00 Z2.00 E25.00
+Maximum Acceleration (mm/s2):
+M201 X100 Y100 Z10 E1000
+Accelerations: P=printing, R=retract and T=travel
+M204 P100.00 R200.00 T100.00
+Advanced variables: S=Min feedrate (mm/s), T=Min travel feedrate (mm/s), B=minimum segment time (ms), X=maximum XY jerk (mm/s),  Z=maximum Z jerk (mm/s),  E=maximum E jerk (mm/s)
+M205 S0.00 T0.00 B20000 X20.00 Z0.40 E5.00
+Home offset (mm):
+M206 X0.00 Y0.00 Z0.00
+Material heatup parameters:
+M145 M0 H180 B70 F0
+M145 M1 H240 B110 F0
+PID settings:  
+M301 P30.63 I2.09 D112.16 C100.00 L20
+M304 P267.90 I19.20 D934.61
+Filament settings: Disabled
+M200 D3.00     
+M200 D0
