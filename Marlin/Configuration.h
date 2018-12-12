@@ -591,7 +591,7 @@ const bool Z_MIN_PROBE_ENDSTOP_INVERTING = false; // set to true to invert the l
 
 // red PLA @1.9mm (says 1.75 on packet) - print at 200/175
 //#define DEFAULT_AXIS_STEPS_PER_UNIT   {80,80,4000, 625}  // changed gear ratio
-#define DEFAULT_AXIS_STEPS_PER_UNIT   {160,80,4000, 625}  // changed driver on x
+#define DEFAULT_AXIS_STEPS_PER_UNIT   {160,80,8000, 625}  // changed driver on z 
 
 
 // steps per mm on extruder 31 by calculation then adjusted by experiment
