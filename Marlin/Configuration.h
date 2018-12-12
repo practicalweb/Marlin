@@ -590,7 +590,9 @@ const bool Z_MIN_PROBE_ENDSTOP_INVERTING = false; // set to true to invert the l
 //#define DEFAULT_AXIS_STEPS_PER_UNIT   {80,80,4000, 626}  // changed gear ratio
 
 // red PLA @1.9mm (says 1.75 on packet) - print at 200/175
-#define DEFAULT_AXIS_STEPS_PER_UNIT   {80,80,4000, 625}  // changed gear ratio
+//#define DEFAULT_AXIS_STEPS_PER_UNIT   {80,80,4000, 625}  // changed gear ratio
+#define DEFAULT_AXIS_STEPS_PER_UNIT   {160,80,4000, 625}  // changed driver on x
+
 
 // steps per mm on extruder 31 by calculation then adjusted by experiment
 // X/Y 1.8 degree (200 steps per rev) no microsteps (1 step per step) betlt pitch 2 teeth per mm, 20 tooth pully
